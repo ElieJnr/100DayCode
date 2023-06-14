@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 float resolveEquDeg1(float a, float b) {
     float X = 0;
