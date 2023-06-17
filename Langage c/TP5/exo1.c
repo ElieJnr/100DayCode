@@ -2,18 +2,13 @@
 
 void main()
 {
-    int tabNotes[10]={12,13,10,15,16,19,20,12,9,12};
+    int tabNotes[10]={18,12,5,20,15,7,18,10,15,11};
     int sum=0;
     int notesMax=tabNotes[0];
     int t= sizeof(tabNotes)/sizeof(tabNotes[0]);
     for (int i =0; i < t; i++)
     {
-        for (i =0; i < t; i++)
-        {
-            sum+=tabNotes[i];
-        }int moyenne= sum/t;
-        printf("%d",moyenne)
-        
+        sum+=tabNotes[i];
         if(tabNotes[i]>notesMax)
         {
             notesMax=tabNotes[i];
@@ -21,5 +16,8 @@ void main()
             continue;
         }
         
-    }printf("%d",notesMax);
+    }printf("la plus grande des notes est: %d\n",notesMax);
+    int moyenne=sum/t;
+    printf("la moyenne des %d termes saisi est : %d",t,moyenne);
+    
 }
