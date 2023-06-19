@@ -20,7 +20,7 @@ float delta(float a, float b, float c)
 float resolveEquDeg2(float a,float b,float c)
 {   if (a==0)
     {
-        
+        return resolveEquDeg1(b,c);
         
     }else
     {

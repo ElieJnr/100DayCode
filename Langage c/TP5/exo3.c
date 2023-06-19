@@ -22,10 +22,6 @@ int trouve(int tab[],int val)
         {
             return i;
         }
-        else
-        {
-            continue;
-        }
     }return -1;
     
 }
