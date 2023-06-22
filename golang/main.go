@@ -1,30 +1,45 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
-type surface interface {
-	Surface() int
-}
-
-type figure struct {
-	longueur int
-	largeur  int
+type User struct {
+	Nom   string `json: "Nom"`
+	Age   int    `json: "Age"`
+	Mail  string `json: "Mail"`
+	Riche bool   `json: "Riche"`
 }
 
 func main() {
-	carre := figure{
-		longueur: 10,
-		largeur:  10,
+	jsonFromAPI := `
+[
+	{
+		"Nom": "Elie",
+		"Age": 22,
+		"Mail": "elie@example.com",
+		"Riche": false
+	},
+	{
+		"Nom": "Kapil",
+		"Age": 18,
+		"Mail": "kapil@example.com",
+		"Riche": false
+	},
+	{
+		"Nom": "Elon",
+		"Age": 56,
+		"Mail": "elon@tesla.com",
+		"Riche": true
 	}
-	fmt.Println(carre.Surface())
-	rectangle := figure{
-		longueur: 20,
-		largeur:  13,
-	}
-	fmt.Println(rectangle.Surface())
-}
+]`
 
-func (c figure) Surface() int {
-	surface := c.longueur * c.largeur
-	return surface
+	var users []User
+	err := json.Unmarshal([]byte(jsonFromAPI), &users)
+	if err != nil {
+		fmt.Println("ERROR unmarshalling json: ", err)
+	}
+
+	fmt.Printf("Json: %v\n", users)
 }
