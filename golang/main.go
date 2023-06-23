@@ -1,45 +1,38 @@
 package main
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 )
 
-type User struct {
-	Nom   string `json: "Nom"`
-	Age   int    `json: "Age"`
-	Mail  string `json: "Mail"`
-	Riche bool   `json: "Riche"`
+type Richesse interface {
+	riche() (bool, error)
+}
+
+type Person struct {
+	age  int
+	rich bool
+}
+
+func (c Person) riche() (bool, error) {
+	if c.rich != true && c.rich != false {
+		return false, errors.New("Un booléen est requis")
+	} else if c.rich {
+		return true, nil
+	} else {
+		return false, nil
+	}
 }
 
 func main() {
-	jsonFromAPI := `
-[
-	{
-		"Nom": "Elie",
-		"Age": 22,
-		"Mail": "elie@example.com",
-		"Riche": false
-	},
-	{
-		"Nom": "Kapil",
-		"Age": 18,
-		"Mail": "kapil@example.com",
-		"Riche": false
-	},
-	{
-		"Nom": "Elon",
-		"Age": 56,
-		"Mail": "elon@tesla.com",
-		"Riche": true
+	Myinfos := Person{
+		age:  22,
+		rich: false,
 	}
-]`
-
-	var users []User
-	err := json.Unmarshal([]byte(jsonFromAPI), &users)
+	isriche, err := Myinfos.riche()
 	if err != nil {
-		fmt.Println("ERROR unmarshalling json: ", err)
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Isriche:", isriche)
 	}
-
-	fmt.Printf("Json: %v\n", users)
 }
